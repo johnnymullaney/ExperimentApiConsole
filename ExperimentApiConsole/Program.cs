@@ -26,7 +26,7 @@ static OptiListResponse<Flag> GetFlagsRequest(RestClient client, string projectI
     return response;
 }
 
-static OptiListResponse<Flag> GetFlagsWithABTests(RestClient client, string projectId, string environmentName)
+static List<Rule> GetFlagsWithABTests(RestClient client, string projectId, string environmentName)
 {
     var flagRequest = new RestRequest($"/flags/v1/projects/{projectId}/flags?rule_type=a/b", Method.Get);
 
@@ -47,7 +47,7 @@ static OptiListResponse<Flag> GetFlagsWithABTests(RestClient client, string proj
         rules.AddRange(ruleResponse.Rules.Values);
     }
 
-    return flagResponse;
+    return rules;
 }
 
 static RestClient GetRestClient(string restAuthToken, bool v1Api = false)
