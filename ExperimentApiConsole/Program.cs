@@ -3,9 +3,9 @@ using ExperimentApiConsole.Models;
 using Newtonsoft.Json;
 using RestSharp;
 
-string projectId = "<Insert Project Id>";
-string restAuthToken = "Bearer <Insert Bearer Token>";
-string environmentName = "<Insert Environment Name>";
+string projectId = "21239710780";
+string restAuthToken = "Bearer 2:1wQEGKJ9M2UUG83A3YHU3G6j7DFOmmY_qHwf194sz_eCnGrdm9CE";
+string environmentName = "development";
 
 var client = GetRestClient(restAuthToken, true);
 
@@ -38,8 +38,6 @@ static OptiListResponse<Flag> GetFlagsWithABTests(RestClient client, string proj
 
     foreach (var flag in flagResponse.Items)
     {
-        // TODO how do we choose environment
-        // Naming convention and app setting?
         var ruleRequest = new RestRequest($"/flags/v1/projects/{projectId}/flags/{flag.Key}/environments/{environmentName}/ruleset", Method.Get);
 
         var serialisedRuleResponse = client.GetAsync(ruleRequest).Result;
